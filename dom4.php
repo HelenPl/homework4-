@@ -4,6 +4,10 @@ $content = file_get_contents('http://api.openweathermap.org/data/2.5/weather?q=H
 
 $result = json_decode($content, true);
 
+$name = $_GET["q"];
+$json = $_GET["mode"];
+$temp = $_GET["units"];
+$key = $_GET["appid"]
 
 ?>
 
@@ -14,14 +18,16 @@ $result = json_decode($content, true);
 	<title>Document</title>
 </head>
 <body>
-	
-	<div>Temperature:<?php echo $result[main][temp]."<span>&degC</span>".PHP_EOL;?>
+	<div>City:<?php echo $result ["name"].PHP_EOL;?></div>
+	<div>Temperature:<?php echo $result["main"]["temp"]."<span>&degC</span>".PHP_EOL;?>
 	</div>
 		
-	<div>Pressure:<?php echo $result[main][pressure].'hpa'.PHP_EOL; ?>
+	<div>Pressure:<?php echo $result["main"]["pressure"].'hpa'.PHP_EOL; ?>
 	</div>
-	<div>Wind:<?php echo $result[wind][speed].'m/s'.PHP_EOL;?>
+	<div>Wind:<?php echo $result["wind"]["speed"].'m/s'.PHP_EOL;?>
 	</div>
 	<?php  ?>
 </body>
 </html>
+
+
