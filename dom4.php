@@ -1,13 +1,22 @@
 <?php 
 
-$content = file_get_contents('http://api.openweathermap.org/data/2.5/weather?q=Houston,us&mode=json&units=metric&appid=202e68eba3ba64da86ddc1e8c06f74cf');
+$url = 'http://api.openweathermap.org/data/2.5/weather?q=Houston,us&mode=json&units=metric&appid=202e68eba3ba64da86ddc1e8c06f74cf'; 
+
+$curl = curl_init($url);
+curl_setopt ($curl, CURLOPT_RETURNTRANSFER, 1);
+$content = curl_exec($curl);
+curl_close($curl);
+
+
+$parse = parse_url($url, PHP_URL_QUERY);
+parse_str($parse, $output);
+
+$x = $output['q'];  
+$y = $output['appid'];
+
 
 $result = json_decode($content, true);
 
-$name = $_GET["q"];
-$json = $_GET["mode"];
-$temp = $_GET["units"];
-$key = $_GET["appid"]
 
 ?>
 
@@ -18,7 +27,6 @@ $key = $_GET["appid"]
 	<title>Document</title>
 </head>
 <body>
-	<div>City:<?php echo $result ["name"].PHP_EOL;?></div>
 	<div>Temperature:<?php echo $result["main"]["temp"]."<span>&degC</span>".PHP_EOL;?>
 	</div>
 		
